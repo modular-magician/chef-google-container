@@ -37,9 +37,10 @@ require 'google/container/property/boolean'
 require 'google/container/property/cluster_addons_config'
 require 'google/container/property/cluster_horizontal_pod_autoscaling'
 require 'google/container/property/cluster_http_load_balancing'
+require 'google/container/property/cluster_logging_service'
 require 'google/container/property/cluster_master_auth'
+require 'google/container/property/cluster_monitoring_service'
 require 'google/container/property/cluster_node_config'
-require 'google/container/property/enum'
 require 'google/container/property/integer'
 require 'google/container/property/namevalues'
 require 'google/container/property/string'
@@ -70,10 +71,11 @@ module Google
                coerce: ::Google::Container::Property::ClusterMasterAuth.coerce, desired_state: true
       property :logging_service,
                equal_to: %w[logging.googleapis.com none],
-               coerce: ::Google::Container::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Container::Property::LoggingServiceEnum.coerce, desired_state: true
       property :monitoring_service,
                equal_to: %w[monitoring.googleapis.com none],
-               coerce: ::Google::Container::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Container::Property::MonitoringServiceEnum.coerce,
+               desired_state: true
       property :network
                String, coerce: ::Google::Container::Property::String.coerce, desired_state: true
       property :cluster_ipv4_cidr
@@ -139,9 +141,11 @@ module Google
           @current_resource.master_auth =
             ::Google::Container::Property::ClusterMasterAuth.api_parse(fetch['masterAuth'])
           @current_resource.logging_service =
-            ::Google::Container::Property::Enum.api_parse(fetch['loggingService'])
+            ::Google::Container::Property::LoggingServiceEnum.api_parse(fetch['loggingService'])
           @current_resource.monitoring_service =
-            ::Google::Container::Property::Enum.api_parse(fetch['monitoringService'])
+            ::Google::Container::Property::MonitoringServiceEnum.api_parse(
+              fetch['monitoringService']
+            )
           @current_resource.network =
             ::Google::Container::Property::String.api_parse(fetch['network'])
           @current_resource.cluster_ipv4_cidr =
