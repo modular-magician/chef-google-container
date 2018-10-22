@@ -29,7 +29,7 @@ module Google
   module Container
     module Data
       # A class to manage data for MasterAuth for cluster.
-      class ClusterMasterAuth
+      class ClusterMasterauth
         include Comparable
 
         attr_reader :username
@@ -59,7 +59,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? ClusterMasterAuth
+          return false unless other.is_a? ClusterMasterauth
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -68,7 +68,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? ClusterMasterAuth
+          return false unless other.is_a? ClusterMasterauth
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -94,9 +94,9 @@ module Google
         end
       end
 
-      # Manages a ClusterMasterAuth nested object
+      # Manages a ClusterMasterauth nested object
       # Data is coming from the GCP API
-      class ClusterMasterAuthApi < ClusterMasterAuth
+      class ClusterMasterauthApi < ClusterMasterauth
         def initialize(args)
           @username = Google::Container::Property::String.api_parse(args['username'])
           @password = Google::Container::Property::String.api_parse(args['password'])
@@ -108,9 +108,9 @@ module Google
         end
       end
 
-      # Manages a ClusterMasterAuth nested object
+      # Manages a ClusterMasterauth nested object
       # Data is coming from the Chef catalog
-      class ClusterMasterAuthCatalog < ClusterMasterAuth
+      class ClusterMasterauthCatalog < ClusterMasterauth
         def initialize(args)
           @username = Google::Container::Property::String.catalog_parse(args[:username])
           @password = Google::Container::Property::String.catalog_parse(args[:password])
@@ -125,23 +125,23 @@ module Google
 
     module Property
       # A class to manage input to MasterAuth for cluster.
-      class ClusterMasterAuth
+      class ClusterMasterauth
         def self.coerce
-          ->(x) { ::Google::Container::Property::ClusterMasterAuth.catalog_parse(x) }
+          ->(x) { ::Google::Container::Property::ClusterMasterauth.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ClusterMasterAuth
-          Data::ClusterMasterAuthCatalog.new(value)
+          return value if value.is_a? Data::ClusterMasterauth
+          Data::ClusterMasterauthCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ClusterMasterAuth
-          Data::ClusterMasterAuthApi.new(value)
+          return value if value.is_a? Data::ClusterMasterauth
+          Data::ClusterMasterauthApi.new(value)
         end
       end
     end
