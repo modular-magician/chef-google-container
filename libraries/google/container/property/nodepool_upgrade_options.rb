@@ -29,7 +29,7 @@ module Google
   module Container
     module Data
       # A class to manage data for UpgradeOptions for node_pool.
-      class NodePoolUpgradeOptions
+      class NodePoolUpgradeoptions
         include Comparable
 
         attr_reader :auto_upgrade_start_time
@@ -50,7 +50,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? NodePoolUpgradeOptions
+          return false unless other.is_a? NodePoolUpgradeoptions
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -59,7 +59,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? NodePoolUpgradeOptions
+          return false unless other.is_a? NodePoolUpgradeoptions
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -82,9 +82,9 @@ module Google
         end
       end
 
-      # Manages a NodePoolUpgradeOptions nested object
+      # Manages a NodePoolUpgradeoptions nested object
       # Data is coming from the GCP API
-      class NodePoolUpgradeOptionsApi < NodePoolUpgradeOptions
+      class NodePoolUpgradeoptionsApi < NodePoolUpgradeoptions
         def initialize(args)
           @auto_upgrade_start_time =
             Google::Container::Property::Time.api_parse(args['autoUpgradeStartTime'])
@@ -92,9 +92,9 @@ module Google
         end
       end
 
-      # Manages a NodePoolUpgradeOptions nested object
+      # Manages a NodePoolUpgradeoptions nested object
       # Data is coming from the Chef catalog
-      class NodePoolUpgradeOptionsCatalog < NodePoolUpgradeOptions
+      class NodePoolUpgradeoptionsCatalog < NodePoolUpgradeoptions
         def initialize(args)
           @auto_upgrade_start_time =
             Google::Container::Property::Time.catalog_parse(args[:auto_upgrade_start_time])
@@ -105,23 +105,23 @@ module Google
 
     module Property
       # A class to manage input to UpgradeOptions for node_pool.
-      class NodePoolUpgradeOptions
+      class NodePoolUpgradeoptions
         def self.coerce
-          ->(x) { ::Google::Container::Property::NodePoolUpgradeOptions.catalog_parse(x) }
+          ->(x) { ::Google::Container::Property::NodePoolUpgradeoptions.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::NodePoolUpgradeOptions
-          Data::NodePoolUpgradeOptionsCatalog.new(value)
+          return value if value.is_a? Data::NodePoolUpgradeoptions
+          Data::NodePoolUpgradeoptionsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::NodePoolUpgradeOptions
-          Data::NodePoolUpgradeOptionsApi.new(value)
+          return value if value.is_a? Data::NodePoolUpgradeoptions
+          Data::NodePoolUpgradeoptionsApi.new(value)
         end
       end
     end

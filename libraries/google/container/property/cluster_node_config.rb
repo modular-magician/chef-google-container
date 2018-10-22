@@ -29,7 +29,7 @@ module Google
   module Container
     module Data
       # A class to manage data for NodeConfig for cluster.
-      class ClusterNodeConfig
+      class ClusterNodeconfig
         include Comparable
 
         attr_reader :machine_type
@@ -74,7 +74,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? ClusterNodeConfig
+          return false unless other.is_a? ClusterNodeconfig
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -83,7 +83,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? ClusterNodeConfig
+          return false unless other.is_a? ClusterNodeconfig
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -114,9 +114,9 @@ module Google
         end
       end
 
-      # Manages a ClusterNodeConfig nested object
+      # Manages a ClusterNodeconfig nested object
       # Data is coming from the GCP API
-      class ClusterNodeConfigApi < ClusterNodeConfig
+      class ClusterNodeconfigApi < ClusterNodeconfig
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @machine_type = Google::Container::Property::String.api_parse(args['machineType'])
@@ -133,9 +133,9 @@ module Google
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a ClusterNodeConfig nested object
+      # Manages a ClusterNodeconfig nested object
       # Data is coming from the Chef catalog
-      class ClusterNodeConfigCatalog < ClusterNodeConfig
+      class ClusterNodeconfigCatalog < ClusterNodeconfig
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @machine_type = Google::Container::Property::String.catalog_parse(args[:machine_type])
@@ -158,23 +158,23 @@ module Google
 
     module Property
       # A class to manage input to NodeConfig for cluster.
-      class ClusterNodeConfig
+      class ClusterNodeconfig
         def self.coerce
-          ->(x) { ::Google::Container::Property::ClusterNodeConfig.catalog_parse(x) }
+          ->(x) { ::Google::Container::Property::ClusterNodeconfig.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ClusterNodeConfig
-          Data::ClusterNodeConfigCatalog.new(value)
+          return value if value.is_a? Data::ClusterNodeconfig
+          Data::ClusterNodeconfigCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ClusterNodeConfig
-          Data::ClusterNodeConfigApi.new(value)
+          return value if value.is_a? Data::ClusterNodeconfig
+          Data::ClusterNodeconfigApi.new(value)
         end
       end
     end

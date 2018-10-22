@@ -93,7 +93,7 @@ module Google
           @auto_upgrade = Google::Container::Property::Boolean.api_parse(args['autoUpgrade'])
           @auto_repair = Google::Container::Property::Boolean.api_parse(args['autoRepair'])
           @upgrade_options =
-            Google::Container::Property::NodePoolUpgradeOptions.api_parse(args['upgradeOptions'])
+            Google::Container::Property::NodePoolUpgradeoptions.api_parse(args['upgradeOptions'])
         end
       end
 
@@ -103,7 +103,7 @@ module Google
         def initialize(args)
           @auto_upgrade = Google::Container::Property::Boolean.catalog_parse(args[:auto_upgrade])
           @auto_repair = Google::Container::Property::Boolean.catalog_parse(args[:auto_repair])
-          @upgrade_options = Google::Container::Property::NodePoolUpgradeOptions.catalog_parse(
+          @upgrade_options = Google::Container::Property::NodePoolUpgradeoptions.catalog_parse(
             args[:upgrade_options]
           )
         end

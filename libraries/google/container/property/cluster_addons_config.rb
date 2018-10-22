@@ -29,7 +29,7 @@ module Google
   module Container
     module Data
       # A class to manage data for AddonsConfig for cluster.
-      class ClusterAddonsConfig
+      class ClusterAddonsconfig
         include Comparable
 
         attr_reader :http_load_balancing
@@ -50,7 +50,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? ClusterAddonsConfig
+          return false unless other.is_a? ClusterAddonsconfig
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -59,7 +59,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? ClusterAddonsConfig
+          return false unless other.is_a? ClusterAddonsconfig
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -82,30 +82,30 @@ module Google
         end
       end
 
-      # Manages a ClusterAddonsConfig nested object
+      # Manages a ClusterAddonsconfig nested object
       # Data is coming from the GCP API
-      class ClusterAddonsConfigApi < ClusterAddonsConfig
+      class ClusterAddonsconfigApi < ClusterAddonsconfig
         def initialize(args)
-          @http_load_balancing = Google::Container::Property::ClusterHttpLoadBalancing.api_parse(
+          @http_load_balancing = Google::Container::Property::ClusterHttploadbalancing.api_parse(
             args['httpLoadBalancing']
           )
           @horizontal_pod_autoscaling =
-            Google::Container::Property::ClusterHorizontalPodAutoscaling.api_parse(
+            Google::Container::Property::ClusterHorizontalpodautoscaling.api_parse(
               args['horizontalPodAutoscaling']
             )
         end
       end
 
-      # Manages a ClusterAddonsConfig nested object
+      # Manages a ClusterAddonsconfig nested object
       # Data is coming from the Chef catalog
-      class ClusterAddonsConfigCatalog < ClusterAddonsConfig
+      class ClusterAddonsconfigCatalog < ClusterAddonsconfig
         def initialize(args)
           @http_load_balancing =
-            Google::Container::Property::ClusterHttpLoadBalancing.catalog_parse(
+            Google::Container::Property::ClusterHttploadbalancing.catalog_parse(
               args[:http_load_balancing]
             )
           @horizontal_pod_autoscaling =
-            Google::Container::Property::ClusterHorizontalPodAutoscaling.catalog_parse(
+            Google::Container::Property::ClusterHorizontalpodautoscaling.catalog_parse(
               args[:horizontal_pod_autoscaling]
             )
         end
@@ -114,23 +114,23 @@ module Google
 
     module Property
       # A class to manage input to AddonsConfig for cluster.
-      class ClusterAddonsConfig
+      class ClusterAddonsconfig
         def self.coerce
-          ->(x) { ::Google::Container::Property::ClusterAddonsConfig.catalog_parse(x) }
+          ->(x) { ::Google::Container::Property::ClusterAddonsconfig.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ClusterAddonsConfig
-          Data::ClusterAddonsConfigCatalog.new(value)
+          return value if value.is_a? Data::ClusterAddonsconfig
+          Data::ClusterAddonsconfigCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ClusterAddonsConfig
-          Data::ClusterAddonsConfigApi.new(value)
+          return value if value.is_a? Data::ClusterAddonsconfig
+          Data::ClusterAddonsconfigApi.new(value)
         end
       end
     end

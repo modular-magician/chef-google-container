@@ -63,11 +63,11 @@ module Google
       property :initial_node_count,
                Integer, coerce: ::Google::Container::Property::Integer.coerce, desired_state: true
       property :node_config,
-               [Hash, ::Google::Container::Data::ClusterNodeConfig],
-               coerce: ::Google::Container::Property::ClusterNodeConfig.coerce, desired_state: true
+               [Hash, ::Google::Container::Data::ClusterNodeconfig],
+               coerce: ::Google::Container::Property::ClusterNodeconfig.coerce, desired_state: true
       property :master_auth,
-               [Hash, ::Google::Container::Data::ClusterMasterAuth],
-               coerce: ::Google::Container::Property::ClusterMasterAuth.coerce, desired_state: true
+               [Hash, ::Google::Container::Data::ClusterMasterauth],
+               coerce: ::Google::Container::Property::ClusterMasterauth.coerce, desired_state: true
       property :logging_service,
                equal_to: %w[logging.googleapis.com none],
                coerce: ::Google::Container::Property::Enum.coerce, desired_state: true
@@ -79,8 +79,8 @@ module Google
       property :cluster_ipv4_cidr,
                String, coerce: ::Google::Container::Property::String.coerce, desired_state: true
       property :addons_config,
-               [Hash, ::Google::Container::Data::ClusterAddonsConfig],
-               coerce: ::Google::Container::Property::ClusterAddonsConfig.coerce,
+               [Hash, ::Google::Container::Data::ClusterAddonsconfig],
+               coerce: ::Google::Container::Property::ClusterAddonsconfig.coerce,
                desired_state: true
       property :subnetwork,
                String, coerce: ::Google::Container::Property::String.coerce, desired_state: true
@@ -137,7 +137,7 @@ module Google
           @current_resource.description =
             ::Google::Container::Property::String.api_parse(fetch['description'])
           @current_resource.master_auth =
-            ::Google::Container::Property::ClusterMasterAuth.api_parse(fetch['masterAuth'])
+            ::Google::Container::Property::ClusterMasterauth.api_parse(fetch['masterAuth'])
           @current_resource.logging_service =
             ::Google::Container::Property::Enum.api_parse(fetch['loggingService'])
           @current_resource.monitoring_service =
@@ -147,7 +147,7 @@ module Google
           @current_resource.cluster_ipv4_cidr =
             ::Google::Container::Property::String.api_parse(fetch['clusterIpv4Cidr'])
           @current_resource.addons_config =
-            ::Google::Container::Property::ClusterAddonsConfig.api_parse(fetch['addonsConfig'])
+            ::Google::Container::Property::ClusterAddonsconfig.api_parse(fetch['addonsConfig'])
           @current_resource.subnetwork =
             ::Google::Container::Property::String.api_parse(fetch['subnetwork'])
           @current_resource.location =
